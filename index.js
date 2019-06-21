@@ -6,8 +6,8 @@ app.use(express.json());
 const users = [
 {id:1,
  email:'maira@gmail.com',
- firstName:'Maira',
- lastName:'Princess',
+ firstName:'maira',
+ lastName:'princess',
  password:'',
  phoneNumber:'+256782454',
  address:'Kampala' ,
@@ -15,8 +15,8 @@ const users = [
 
  {id:2, 
  email:'daren@gmail.com', 
- firstName:'Daren', 
- lastName:'Martha', 
+ firstName:'daren', 
+ lastName:'martha', 
  password:'',
  phoneNumber:'+256893436', 
  address:'Entebbe' , 
@@ -26,7 +26,7 @@ const users = [
     email:'zariat@gmail.com', 
     firstName:'Zariat', 
     lastName:'Marion', 
-    password:'',
+    password:'zariat',
    phoneNumber:'+256065874',
    address:'Wakiso' , 
    isadmin:false}
@@ -49,6 +49,15 @@ if(req.body.email === finduser.email){
     };
       users.push(user);
       res.send(users);
-})
+});
+
+app.post('/api/v1/users/auth/signin', (req, res) => {
+   const signinuser = users.find(user => user.email === req.body.email);
+   if(req.body.email === signinuser.email && req.body.password === signinuser.password){
+  return res.status(200).send('successfully signed in')
+   };
+    res.status(400).send('provide correct details')
+});
+
 
 app.listen(port, () => console.log(`listening on port ${port}...!`))
