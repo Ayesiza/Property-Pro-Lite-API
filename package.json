@@ -1,0 +1,26 @@
+{
+  "name": "property-pro-lite-api",
+  "version": "1.0.0",
+  "description": "Property Pro Lite is a platform where people can create and/or search properties for sale or rent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayesiza/Property-Pro-Lite-API.git"
+  },
+  "author": "Ayesiza Hawah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayesiza/Property-Pro-Lite-API/issues"
+  },
+  "homepage": "https://github.com/Ayesiza/Property-Pro-Lite-API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "nodemon": "^1.19.1"
+  }
+}
