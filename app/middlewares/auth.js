@@ -1,7 +1,4 @@
-import {
-    users
-}
-from '../models/users';
+import { users }from '../models/users';
 
 export const checkIfUserExists = (req, res, next) => {
     const finduser = users.find(user => user.email === req.body.email);
@@ -13,4 +10,4 @@ export const checkIfUserExists = (req, res, next) => {
     } else {
         next()
     }
-}
+};

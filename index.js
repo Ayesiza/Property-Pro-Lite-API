@@ -8,6 +8,7 @@ app.use(express.json());
 
 app.use('/api/v1/', apiRouters)
 
+
 app.listen(port, () => console.log(`listening on port ${port}...!`));
 
 export default app;

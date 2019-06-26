@@ -1,7 +1,4 @@
-import {
-    users
-}
-from '../models/users';
+import { users } from '../models/users';
 export const signUp = (req, res) => {
     const user = {
         id: users.length + 1,
