@@ -18,7 +18,7 @@ propertys.push(property);
 res.status(201).send({message: 'success', property})
 
 };
-
+// find (ad)property then update details
 export const updateProperty = (req,res)=>{
     const property = propertys.find(ad => ad.id === parseInt(req.params.id))
     if(!property) return res.status(404).send({error:404, message:'property not found'})
@@ -26,4 +26,11 @@ export const updateProperty = (req,res)=>{
     property.type = req.body.type,
     res.status(201).send({message: 'success', property})
 
+};
+// find (a)property then mark as sold 
+export const markAsSold =(req,res) =>{
+    const property = propertys.find(a => a.id === parseInt(req.params.id))
+    if(!property) return res.status(404).send({error:404, message:'property of that id not found'})
+    property.status = 'sold',
+    res.status(201).send({message: 'success', property})
 };
