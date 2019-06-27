@@ -28,4 +28,29 @@ describe('Tests property routes', () => {
                 done();
             });
         });
-    });
+
+        it('tests updateProperty', (done) => {
+            request(app)
+                .patch('/api/v1/property/1')
+                .send({
+                    price: '968.90',
+                    type: 'mini flat',  
+                })
+                .end((err, res) => {
+                    res.status.should.equal(201);
+                    done();
+                });
+            });
+            it('tests updateProperty', (done) => {
+                request(app)
+                    .patch('/api/v1/property/22')
+                    .send({
+                        price: '968.90',
+                        type: 'mini flat',  
+                    })
+                    .end((err, res) => {
+                        res.status.should.equal(404);
+                        done();
+                    });
+                });
+        });
