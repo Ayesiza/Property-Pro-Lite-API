@@ -45,3 +45,8 @@ export const deleteAdvert = (req, res) => {
 
     res.status(200).send({status:200, message:'successfuly deleted'});
 };
+
+// get all property adverts
+export const allProperty =(req , res)=> {
+    res.status(200).send({status:200,propertys});
+};

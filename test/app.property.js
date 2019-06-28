@@ -102,4 +102,14 @@ describe('Tests property routes', () => {
                 done();
             });
     });
+
+    it('tests allProperty', (done) => {
+        request(app)
+            .get('/api/v1/property')
+            .end((err, res) => {
+                res.status.should.equal(200);
+               
+                done();
+            });
+    });
 });
