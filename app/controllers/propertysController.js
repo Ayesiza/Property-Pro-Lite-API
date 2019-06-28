@@ -18,7 +18,7 @@ propertys.push(property);
 res.status(201).send({message: 'success', property})
 
 };
-// find (ad)property then update details
+// find (ad)property id then update details
 export const updateProperty = (req,res)=>{
     const property = propertys.find(ad => ad.id === parseInt(req.params.id))
     if(!property) return res.status(404).send({error:404, message:'property not found'})
@@ -27,10 +27,21 @@ export const updateProperty = (req,res)=>{
     res.status(201).send({message: 'success', property})
 
 };
-// find (a)property then mark as sold 
+// find (a)property id then mark as sold 
 export const markAsSold =(req,res) =>{
     const property = propertys.find(a => a.id === parseInt(req.params.id))
     if(!property) return res.status(404).send({error:404, message:'property of that id not found'})
     property.status = 'sold',
     res.status(201).send({message: 'success', property})
+};
+// find (d)property id
+export const deleteAdvert = (req, res) => {
+    const property = propertys.find(d => d.id === parseInt(req.params.id))
+    if(!property) return res.status(404).send({status:404, message:'property of given id not found'})
+    
+     // delete
+    const index = propertys.indexOf(property)
+    propertys.splice(index, 1)
+
+    res.status(200).send({status:200, message:'successfuly deleted'});
 };
