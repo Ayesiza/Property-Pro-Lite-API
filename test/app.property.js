@@ -53,4 +53,26 @@ describe('Tests property routes', () => {
                         done();
                     });
                 });
-        });
+                it('tests markAsSold', (done) => {
+                    request(app)
+                        .patch('/api/v1/property/1/sold')
+                        .send({
+                            status:'sold'  
+                        })
+                        .end((err, res) => {
+                            res.status.should.equal(201);
+                            done();
+                        });
+                    });
+                    it('tests markAsSold', (done) => {
+                        request(app)
+                            .patch('/api/v1/property/5/sold')
+                            .send({
+                                status:'sold'  
+                            })
+                            .end((err, res) => {
+                                res.status.should.equal(404);
+                                done();
+                            });
+                        });
+              });
