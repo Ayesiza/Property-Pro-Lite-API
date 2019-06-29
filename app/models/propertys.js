@@ -6,7 +6,7 @@ export const propertys =[
       state: 'kampala',
       city: 'kampala',
       address: 'avema park',
-      type: 'mini flat',
+      type: 'miniflat',
       createdOn: '20/9/2019',
       image : 'url(../image/miniflat1.jpg)'
       
@@ -19,7 +19,7 @@ export const propertys =[
         state: 'muhabura',
         city: 'kigali',
         address: 'lumu street',
-        type: '4 bedroom house',
+        type: '4bedroom',
         createdOn: '17/06/2019',
         image : 'url(../image/4bedroom1.jpg)'
         
@@ -32,8 +32,20 @@ export const propertys =[
             state: 'wakiso',
             city: 'nansana',
             address: 'lulu avenue',
-            type: '3 bedroom house',
+            type: '3bedroom',
             createdOn: '24/03/2019',
             image : 'url(../image/3bedroom1.jpg)'
-            }
+            },
+
+            {id:4,
+              owner: 'ameer muhangi',
+              status: 'available',
+              price: '238.90',
+              state: 'hoima',
+              city: 'karong',
+              address: 'kamu street',
+              type: '3bedroom',
+              createdOn: '12/02/2019',
+              image : 'url(../image/3bedroom2.jpg)'
+              }
    ]; 

@@ -5,7 +5,8 @@ import { propertyAdvert } from '../controllers/propertysController';
 import { updateProperty } from '../controllers/propertysController';
 import { markAsSold } from '../controllers/propertysController';
 import { deleteAdvert } from '../controllers/propertysController';
-import { allProperty } from '../controllers/propertysController'
+import { allProperty } from '../controllers/propertysController';
+import { propertType } from '../middlewares/propertymiddleware';
 
 const router = express.Router();
 
@@ -21,6 +22,8 @@ router.patch('/property/:id/sold',markAsSold)
 
 router.delete('/property/:id',deleteAdvert)
 
-router.get('/property', allProperty)
+router.get('/property',propertType, allProperty)
+
+
 
 export default router;
