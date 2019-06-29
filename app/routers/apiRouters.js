@@ -1,12 +1,11 @@
 import express from 'express';
 import { signUp,signIn } from '../controllers/usersController';
 import {checkIfUserExists } from '../middlewares/auth';
-import { propertyAdvert } from '../controllers/propertysController';
-import { updateProperty } from '../controllers/propertysController';
-import { markAsSold } from '../controllers/propertysController';
-import { deleteAdvert } from '../controllers/propertysController';
-import { allProperty } from '../controllers/propertysController';
+import { propertyAdvert,updateProperty } from '../controllers/propertysController';
+import { markAsSold, deleteAdvert } from '../controllers/propertysController';
+import { allProperty, specificProperty } from '../controllers/propertysController';
 import { propertType } from '../middlewares/propertymiddleware';
+
 
 const router = express.Router();
 
@@ -24,6 +23,6 @@ router.delete('/property/:id',deleteAdvert)
 
 router.get('/property',propertType, allProperty)
 
-
+router.get('/property/:id', specificProperty)
 
 export default router;

@@ -41,7 +41,7 @@ describe('Tests property routes', () => {
                 done();
             });
     });
-    it('tests updateProperty', (done) => {
+    it('tests updateProperty not found', (done) => {
         request(app)
             .patch('/api/v1/property/22')
             .send({
@@ -76,6 +76,42 @@ describe('Tests property routes', () => {
             });
     });
 
+    
+    it('tests allProperty', (done) => {
+        request(app)
+            .get('/api/v1/property')
+            .end((err, res) => {
+                res.status.should.equal(200)
+                done();
+            });
+    });
+
+    it('tests propertyType', (done) => {
+        request(app)
+            .get('/api/v1/property?type=3bedroom')
+            .end((err, res) => {
+                res.status.should.equal(200)
+                done();
+            });
+    });
+
+    it('tests specificProperty', (done) => {
+        request(app)
+            .get('/api/v1/property/4')
+            .end((err, res) => {
+                res.status.should.equal(200);
+                done();
+            });
+    });
+    it('tests specificProperty not found', (done) => {
+        request(app)
+            .get('/api/v1/property/9')
+            .end((err, res) => {
+                res.status.should.equal(404);
+                done();
+            });
+    });
+    
     it('tests deleteAdvert', (done) => {
         request(app)
             .delete('/api/v1/property/1') 
@@ -95,21 +131,4 @@ describe('Tests property routes', () => {
             });
     });
 
-    it('tests allProperty', (done) => {
-        request(app)
-            .get('/api/v1/property')
-            .end((err, res) => {
-                res.status.should.equal(200)
-                done();
-            });
-    });
-
-    it('tests propertyType', (done) => {
-        request(app)
-            .get('/api/v1/property?type=3bedroom')
-            .end((err, res) => {
-                res.status.should.equal(200)
-                done();
-            });
-    });
 });

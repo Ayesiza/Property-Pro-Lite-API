@@ -48,4 +48,10 @@ export const deleteAdvert = (req, res) => {
 export const allProperty =(req , res) => {
     res.status(200).send({status:200, propertys});
 };
+// get a specific s(property) by id
+export const  specificProperty = (req,res)=>{
+    const property = propertys.find(s => s.id === parseInt(req.params.id))
+    if(!property) return res.status(404).send({error:404, message:'specific property not found'})
+    res.status(200).send({status:200, property})
 
+};
