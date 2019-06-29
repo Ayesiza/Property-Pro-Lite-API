@@ -78,11 +78,7 @@ describe('Tests property routes', () => {
 
     it('tests deleteAdvert', (done) => {
         request(app)
-            .delete('/api/v1/property/2')
-            .send({
-                
-                message: 'property deleted'
-            })
+            .delete('/api/v1/property/1') 
             .end((err, res) => {
                 res.status.should.equal(200);
                 res.body.message.should.equal('successfuly deleted')
@@ -90,13 +86,9 @@ describe('Tests property routes', () => {
             });
     });
 
-    it('tests deleteAdvert', (done) => {
+    it('tests deleteAdvert if not found', (done) => {
         request(app)
-            .delete('/api/v1/property/5')
-            .send({
-                status: 404,
-                message: 'property of given id not found'
-            })
+            .delete('/api/v1/property/9')
             .end((err, res) => {
                 res.status.should.equal(404);
                 done();
@@ -107,8 +99,16 @@ describe('Tests property routes', () => {
         request(app)
             .get('/api/v1/property')
             .end((err, res) => {
-                res.status.should.equal(200);
-               
+                res.status.should.equal(200)
+                done();
+            });
+    });
+
+    it('tests propertyType', (done) => {
+        request(app)
+            .get('/api/v1/property?type=3bedroom')
+            .end((err, res) => {
+                res.status.should.equal(200)
                 done();
             });
     });

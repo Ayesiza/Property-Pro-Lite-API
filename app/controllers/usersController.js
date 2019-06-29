@@ -24,8 +24,5 @@ export const signIn = (req, res) => {
             message: 'wrong email or password'
         })
     }
-    res.send({
-        message: 'success',
-        user
-    })
+    res.send({message: 'success',user})
 };

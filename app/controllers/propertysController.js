@@ -38,15 +38,14 @@ export const markAsSold =(req,res) =>{
 export const deleteAdvert = (req, res) => {
     const property = propertys.find(d => d.id === parseInt(req.params.id))
     if(!property) return res.status(404).send({status:404, message:'property of given id not found'})
-    
      // delete
     const index = propertys.indexOf(property)
     propertys.splice(index, 1)
 
     res.status(200).send({status:200, message:'successfuly deleted'});
 };
-
 // get all property adverts
-export const allProperty =(req , res)=> {
-    res.status(200).send({status:200,propertys});
+export const allProperty =(req , res) => {
+    res.status(200).send({status:200, propertys});
 };
+
