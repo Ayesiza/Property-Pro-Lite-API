@@ -3,8 +3,8 @@ export const users = [
      email:'maira@gmail.com',
      firstName:'maira',
      lastName:'princess',
-     password:'',
-     phoneNumber:'+256782454',
+     password:'maira',
+     phoneNumber:'25678245441',
      address:'kampala' ,
      isadmin:true},
     
@@ -12,8 +12,8 @@ export const users = [
      email:'daren@gmail.com', 
      firstName:'daren', 
      lastName:'martha', 
-     password:'',
-     phoneNumber:'+256893436', 
+     password:'daren',
+     phoneNumber:'25689343661', 
      address:'entebbe' , 
      isadmin:false},
     
@@ -22,7 +22,7 @@ export const users = [
       firstName:'zariat', 
       lastName:'marion', 
       password:'zariat',
-      phoneNumber:'+256065874',
+      phoneNumber:'25606587422',
       address:'wakiso' , 
       isadmin:false}
      ];

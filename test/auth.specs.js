@@ -9,16 +9,17 @@ app.use(express.json());
 app.use('/api/v1/', apiRouter)
 
 describe('Tests auth routes', () => {
-    it('test signup', (done) => {
+    it('test signUp', (done) => {
         request(app)
             .post('/api/v1/users/auth/signup')
             .send({
-                email: "zariate@gmail.com",
+                email: "zaria@gmail.com",
                 firstName: "zariat",
                 lastName: "marion",
                 password: "zariat",
-                phoneNumber: "+256065874",
-                address: "wakiso"
+                phoneNumber: "25606587422",
+                address: "wakiso",
+                isadmin:false
 
             })
             .end((err, res) => {
@@ -26,16 +27,17 @@ describe('Tests auth routes', () => {
                 done();
             });
     });
-    it('test signup', (done) => {
+    it('test signUp userExist', (done) => {
         request(app)
             .post('/api/v1/users/auth/signup')
             .send({
-                email: "zariate@gmail.com",
+                email: "zariat@gmail.com",
                 firstName: "zariat",
                 lastName: "marion",
                 password: "zariat",
-                phoneNumber: "+256065874",
-                address: "wakiso"
+                phoneNumber: "25606587422",
+                address: "wakiso",
+                isadmin:false
 
             })
             .end((err, res) => {
@@ -45,27 +47,26 @@ describe('Tests auth routes', () => {
             });
     });
 
-    it('checks for username existance', (done) => {
+    it('signIn  useremail in existance', (done) => {
         request(app)
             .post('/api/v1/users/auth/signin')
             .send({
-                email: "zaria@gmail.com",
+                email: "zari@gmail.com",
                 password: "zariat"
             })
             .end((err, res) => {
-                res.status.should.equal(409);
+                res.status.should.equal(404);
                 res.body.message.should.equal('wrong email or password');
                 done();
             });
     });
 
-    it('checks user successfully signined', (done) => {
+    it('signIn checks user successfully signined', (done) => {
         request(app)
             .post('/api/v1/users/auth/signin')
             .send({
                 email: "zariat@gmail.com",
                 password: "zariat"
-
             })
             .end((err, res) => {
                 res.status.should.equal(200);
@@ -73,3 +74,4 @@ describe('Tests auth routes', () => {
             });
     });
 });
+

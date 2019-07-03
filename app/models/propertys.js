@@ -1,51 +1,51 @@
 export const propertys =[
      {id:1,
-      owner: 'ahmad nuru',
+      owner: 10,
       status: 'available',
-      price: '768.90',
+      price: 768.90,
       state: 'kampala',
       city: 'kampala',
-      address: 'avema park',
+      address: 'avemaPark',
       type: 'miniflat',
-      createdOn: '20/9/2019',
-      image : 'url(../image/miniflat1.jpg)'
+      createdOn: '02092019',
+      image : 'https://res.cloudinary.com/dr1g2w3wc/image/upload/v1562080747/flat1_iqhf4f.jpg'
       
       },
 
       {id:2,
-        owner: 'johm smith',
+        owner: 20,
         status: 'available',
-        price: '268.50',
+        price: 268.50,
         state: 'muhabura',
         city: 'kigali',
-        address: 'lumu street',
+        address: 'lumuStreet',
         type: '4bedroom',
-        createdOn: '17/06/2019',
-        image : 'url(../image/4bedroom1.jpg)'
+        createdOn: '17062019',
+        image : 'https://res.cloudinary.com/dr1g2w3wc/image/upload/v1562080738/4bedroom1_uhqdxh.jpg'
         
         },
 
         {id:3,
-            owner: 'kamoga martin',
+            owner: 30,
             status: 'sold',
-            price: '868.90',
+            price: 868.90,
             state: 'wakiso',
             city: 'nansana',
-            address: 'lulu avenue',
+            address: 'luluAvenue',
             type: '3bedroom',
-            createdOn: '24/03/2019',
-            image : 'url(../image/3bedroom1.jpg)'
+            createdOn: '24032019',
+            image : 'https://res.cloudinary.com/dr1g2w3wc/image/upload/v1562080743/3bedroom3_uch4yx.jpg'
             },
 
             {id:4,
-              owner: 'ameer muhangi',
+              owner: 40,
               status: 'available',
-              price: '238.90',
+              price: 238.90,
               state: 'hoima',
               city: 'karong',
-              address: 'kamu street',
+              address: 'kamuStreet',
               type: '3bedroom',
-              createdOn: '12/02/2019',
-              image : 'url(../image/3bedroom2.jpg)'
+              createdOn: '12022019',
+              image : 'https://res.cloudinary.com/dr1g2w3wc/image/upload/v1562080730/3bedroom1_kenvve.jpg'
               }
    ]; 
