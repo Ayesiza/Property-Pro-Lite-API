@@ -7,21 +7,32 @@ const app = express()
 app.use(express.json());
 
 app.use('/api/v1/', apiRouter)
-
 describe('Tests property routes', () => {
+    let token = '';
+  before((done) => {
+    request(app)
+      .post('/api/v1/users/auth/signin')
+      .send({
+        email: 'maira@gmail.com',
+        password: 'maira',
+      })
+      .end((err, res) => {
+        token = res.body.user.token;
+        done();
+      });
+  });
     it('tests propertyAdvert', (done) => {
         request(app)
             .post('/api/v1/property')
+            .set('Authorization', `Bearer ${token}`)
             .send({
-                id: 1,
-                owner: 'ahmad nuru',
                 status: 'available',
-                price: '$ 768.90',
+                price: '768.90',
                 state: 'kampala',
                 city: 'kampala',
-                address: 'avema park',
-                type: 'mini flat',
-                createdOn: '20/9/2019'
+                address: 'avemaPark',
+                type: 'miniflat',
+                createdOn: '02092019'
             })
             .end((err, res) => {
                 res.status.should.equal(201);
@@ -32,9 +43,10 @@ describe('Tests property routes', () => {
     it('tests updateProperty', (done) => {
         request(app)
             .patch('/api/v1/property/1')
+            .set('Authorization', `Bearer ${token}`)
             .send({
                 price: '968.90',
-                type: 'mini flat',
+                type: 'miniflat',
             })
             .end((err, res) => {
                 res.status.should.equal(201);
@@ -44,9 +56,10 @@ describe('Tests property routes', () => {
     it('tests updateProperty not found', (done) => {
         request(app)
             .patch('/api/v1/property/22')
+            .set('Authorization', `Bearer ${token}`)
             .send({
                 price: '968.90',
-                type: 'mini flat',
+                type: 'miniflat',
             })
             .end((err, res) => {
                 res.status.should.equal(404);
@@ -56,6 +69,7 @@ describe('Tests property routes', () => {
     it('tests markAsSold', (done) => {
         request(app)
             .patch('/api/v1/property/1/sold')
+            .set('Authorization', `Bearer ${token}`)
             .send({
                 status: 'sold'
             })
@@ -64,9 +78,10 @@ describe('Tests property routes', () => {
                 done();
             });
     });
-    it('tests markAsSold', (done) => {
+    it('tests markAsSold not found', (done) => {
         request(app)
             .patch('/api/v1/property/10/sold')
+            .set('Authorization', `Bearer ${token}`)
             .send({
                 status: 'sold'
             })
@@ -80,6 +95,7 @@ describe('Tests property routes', () => {
     it('tests allProperty', (done) => {
         request(app)
             .get('/api/v1/property')
+            .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 res.status.should.equal(200)
                 done();
@@ -89,6 +105,7 @@ describe('Tests property routes', () => {
     it('tests propertyType', (done) => {
         request(app)
             .get('/api/v1/property?type=3bedroom')
+            .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 res.status.should.equal(200)
                 done();
@@ -98,6 +115,7 @@ describe('Tests property routes', () => {
     it('tests specificProperty', (done) => {
         request(app)
             .get('/api/v1/property/4')
+            .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 res.status.should.equal(200);
                 done();
@@ -106,6 +124,7 @@ describe('Tests property routes', () => {
     it('tests specificProperty not found', (done) => {
         request(app)
             .get('/api/v1/property/9')
+            .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 res.status.should.equal(404);
                 done();
@@ -114,7 +133,9 @@ describe('Tests property routes', () => {
     
     it('tests deleteAdvert', (done) => {
         request(app)
-            .delete('/api/v1/property/1') 
+            .delete('/api/v1/property/1')
+            .set('Authorization', `Bearer ${token}`)
+            .set('Accept', 'application/json')
             .end((err, res) => {
                 res.status.should.equal(200);
                 res.body.message.should.equal('successfuly deleted')
@@ -125,6 +146,7 @@ describe('Tests property routes', () => {
     it('tests deleteAdvert if not found', (done) => {
         request(app)
             .delete('/api/v1/property/9')
+            .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 res.status.should.equal(404);
                 done();

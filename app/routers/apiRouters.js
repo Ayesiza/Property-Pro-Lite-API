@@ -1,28 +1,27 @@
 import express from 'express';
-import { signUp,signIn } from '../controllers/usersController';
-import {checkIfUserExists } from '../middlewares/auth';
-import { propertyAdvert,updateProperty } from '../controllers/propertysController';
-import { markAsSold, deleteAdvert } from '../controllers/propertysController';
-import { allProperty, specificProperty } from '../controllers/propertysController';
-import { propertType } from '../middlewares/propertymiddleware';
+import {userController } from '../controllers/usersController';
+import {checkIfUserExists,authValidate,getToken,userAgent} from '../middlewares/auth';
+import { PropertyController } from '../controllers/propertysController';
+import { propertyType, propertyValidate, verifyUserToken} from '../middlewares/property';
 
-
+const user = new userController;
+const advert = new PropertyController;
 const router = express.Router();
 
-router.post('/users/auth/signup',checkIfUserExists,signUp )
+router.post('/users/auth/signup',authValidate,checkIfUserExists,user.signUp )
 
-router.post('/users/auth/signin',signIn )
+router.post('/users/auth/signin',user.signIn)
 
-router.post('/property',propertyAdvert )
+router.post('/property',getToken, verifyUserToken, propertyValidate, userAgent, advert.propertyAdvert)
 
-router.patch('/property/:id', updateProperty)
+router.patch('/property/:id',getToken, verifyUserToken, userAgent, advert.updateProperty)
 
-router.patch('/property/:id/sold',markAsSold)
+router.patch('/property/:id/sold',getToken, verifyUserToken, userAgent, advert.markAsSold)
 
-router.delete('/property/:id',deleteAdvert)
+router.delete('/property/:id',getToken, verifyUserToken, userAgent, advert.deleteAdvert)
 
-router.get('/property',propertType, allProperty)
+router.get('/property',getToken, verifyUserToken, propertyType, advert.allProperty)
 
-router.get('/property/:id', specificProperty)
+router.get('/property/:id',getToken, verifyUserToken, advert.specificProperty)
 
 export default router;
