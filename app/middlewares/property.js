@@ -1,17 +1,16 @@
  import { propertys }from '../models/propertys';
  import Joi from '@hapi/joi';
- const appSecreteKey = 'hckjdsjsdadnbqdkjdqxbjkqwkn'
+ const appSecretKey = 'hckjdsjsdadnbqdkjdqxbjkqwkn'
  import jwt from 'jsonwebtoken';
 
- export const verifyUserToken =(req, res,next) =>{
- jwt.verify(req.token, appSecreteKey, (err, user) => {
+ export const verifyUserToken =(req, res, next) =>{
+ jwt.verify(req.token, appSecretKey, (err, user) => {
   if (err) return res.status(403).json({ error: 403, message: err.message });
-  req.user = user;
   next();
  })
 }
 
-export const propertType =(req, res ,next) =>{
+export const propertyType =(req, res ,next) =>{
     if (req.query.type){
         const property = propertys.filter(a => a.type === req.query.type)
        return res.status(200).send({status:200, property});

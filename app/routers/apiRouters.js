@@ -2,7 +2,7 @@ import express from 'express';
 import {userController } from '../controllers/usersController';
 import {checkIfUserExists,authValidate,getToken,userAgent} from '../middlewares/auth';
 import { PropertyController } from '../controllers/propertysController';
-import { propertType, propertyValidate, verifyUserToken} from '../middlewares/property';
+import { propertyType, propertyValidate, verifyUserToken} from '../middlewares/property';
 
 const user = new userController;
 const advert = new PropertyController;
@@ -20,7 +20,7 @@ router.patch('/property/:id/sold',getToken, verifyUserToken, userAgent, advert.m
 
 router.delete('/property/:id',getToken, verifyUserToken, userAgent, advert.deleteAdvert)
 
-router.get('/property',getToken, verifyUserToken, propertType, advert.allProperty)
+router.get('/property',getToken, verifyUserToken, propertyType, advert.allProperty)
 
 router.get('/property/:id',getToken, verifyUserToken, advert.specificProperty)
 

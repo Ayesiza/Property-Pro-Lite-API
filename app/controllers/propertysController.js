@@ -30,7 +30,6 @@ updateProperty(req,res){
 };
 // find (a)property id then mark as sold 
 markAsSold(req,res){
-    
     const property = propertys.find(a => a.id === parseInt(req.params.id))
     if(!property) return res.status(404).send({error:404, message:'property of that id not found'})
     property.status = 'sold',
@@ -38,7 +37,6 @@ markAsSold(req,res){
 };
 // find (d)property id
 deleteAdvert(req, res){
-    
     const property = propertys.find(d => d.id === parseInt(req.params.id))
     if(!property) return res.status(404).send({status:404, message:'property of given id not found'})
      // delete

@@ -1,6 +1,7 @@
 import { users }from '../models/users';
 import Joi from '@hapi/joi';
-
+const appSecretKey = 'hckjdsjsdadnbqdkjdqxbjkqwkn'
+ import jwt from 'jsonwebtoken';
 
 export function getToken(req, res, next) {
   const bearerHeader = req.headers.authorization;
@@ -19,11 +20,14 @@ export const checkIfUserExists = (req, res, next) => {
     if (finduser) return res.status(409).send({ error: 409, message: 'user already exists'})
     next() 
 };
-export const userAgent = (req, res, next)=> {
-  const user = users.find(user => user.email === req.user.email);
-  if(user.isadmin === false) return res.status(403).send({error:403,message:'only agent'});
 
-  next();
+export const userAgent = (req, res, next)=> {
+    jwt.verify(req.token, appSecretKey, (err, tokenUser) => {
+     if (err) return res.status(403).json({ error: 403, message: err.message });
+     const user = users.find(user => user.email === tokenUser.email);
+    if(user.isadmin === false) return res.status(403).send({error:403,message:'only agent'});
+    next();
+  })
 }
 // validate input on signup
 export function authValidate(req, res, next) {
