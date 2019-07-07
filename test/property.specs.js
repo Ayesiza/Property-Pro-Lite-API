@@ -9,19 +9,19 @@ app.use(express.json());
 app.use('/api/v1/', apiRouter)
 describe('Tests property routes', () => {
     let token = '';
-  before((done) => {
-    request(app)
-      .post('/api/v1/users/auth/signin')
-      .send({
-        email: 'maira@gmail.com',
-        password: 'maira',
-      })
-      .end((err, res) => {
-        token = res.body.user.token;
-        done();
-      });
-  });
-    it('tests propertyAdvert', (done) => {
+    before((done) => {
+        request(app)
+            .post('/api/v1/users/auth/signin')
+            .send({
+                email: 'maira@gmail.com',
+                password: 'maira',
+            })
+            .end((err, res) => {
+                token = res.body.user.token;
+                done();
+            });
+    });
+    it('tests postPropertyAdvert', (done) => {
         request(app)
             .post('/api/v1/property')
             .set('Authorization', `Bearer ${token}`)
@@ -36,10 +36,12 @@ describe('Tests property routes', () => {
             })
             .end((err, res) => {
                 res.status.should.equal(201);
+                res.body.property.should.have.property('price')
+                res.body.property.should.have.property('type')
+                res.body.property.should.have.property('address')
                 done();
             });
     });
-
     it('tests updateProperty', (done) => {
         request(app)
             .patch('/api/v1/property/1')
@@ -50,9 +52,13 @@ describe('Tests property routes', () => {
             })
             .end((err, res) => {
                 res.status.should.equal(201);
+                res.body.property.should.have.property('price')
+                res.body.property.should.have.property('type')
+                res.body.property.should.have.property('address')
                 done();
             });
     });
+
     it('tests updateProperty not found', (done) => {
         request(app)
             .patch('/api/v1/property/22')
@@ -75,6 +81,9 @@ describe('Tests property routes', () => {
             })
             .end((err, res) => {
                 res.status.should.equal(201);
+                res.body.property.should.have.property('price')
+                res.body.property.should.have.property('type')
+                res.body.property.should.have.property('address')
                 done();
             });
     });
@@ -91,13 +100,13 @@ describe('Tests property routes', () => {
             });
     });
 
-    
     it('tests allProperty', (done) => {
         request(app)
             .get('/api/v1/property')
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
-                res.status.should.equal(200)
+                res.status.should.equal(200);
+                res.body.status.should.equal(200);
                 done();
             });
     });
@@ -130,7 +139,7 @@ describe('Tests property routes', () => {
                 done();
             });
     });
-    
+
     it('tests deleteAdvert', (done) => {
         request(app)
             .delete('/api/v1/property/1')

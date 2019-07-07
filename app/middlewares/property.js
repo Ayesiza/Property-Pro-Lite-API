@@ -1,10 +1,11 @@
  import { propertys }from '../models/propertys';
  import Joi from '@hapi/joi';
- const appSecretKey = 'hckjdsjsdadnbqdkjdqxbjkqwkn'
+ const appSecretkey = 'hckjdsjsdadnbqdkjdqxbjkqwkn'
  import jwt from 'jsonwebtoken';
 
+// verify if user token is valid
  export const verifyUserToken =(req, res, next) =>{
- jwt.verify(req.token, appSecretKey, (err, user) => {
+ jwt.verify(req.token, appSecretkey, (err, userFromToken) => {
   if (err) return res.status(403).json({ error: 403, message: err.message });
   next();
  })
