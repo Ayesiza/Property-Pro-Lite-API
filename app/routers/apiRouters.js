@@ -12,7 +12,7 @@ router.post('/users/auth/signup',authValidate,checkIfUserExists,user.signUp )
 
 router.post('/users/auth/signin',user.signIn)
 
-router.post('/property',getToken, verifyUserToken, propertyValidate, userAgent, advert.propertyAdvert)
+router.post('/property',getToken, verifyUserToken, propertyValidate, userAgent, advert.postPropertyAdvert)
 
 router.patch('/property/:id',getToken, verifyUserToken, userAgent, advert.updateProperty)
 

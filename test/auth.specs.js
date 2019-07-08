@@ -24,6 +24,10 @@ describe('Tests auth routes', () => {
             })
             .end((err, res) => {
                 res.status.should.equal(201);
+                res.body.should.have.property('id')
+                res.body.should.have.property('firstName')
+                res.body.should.have.property('token')
+                res.body.should.have.property('email')
                 done();
             });
     });
@@ -38,7 +42,6 @@ describe('Tests auth routes', () => {
                 phoneNumber: "25606587422",
                 address: "wakiso",
                 isadmin:false
-
             })
             .end((err, res) => {
                 res.status.should.equal(409);
@@ -47,7 +50,7 @@ describe('Tests auth routes', () => {
             });
     });
 
-    it('signIn  useremail in existance', (done) => {
+    it('signIn  user email in existance', (done) => {
         request(app)
             .post('/api/v1/users/auth/signin')
             .send({
@@ -70,6 +73,10 @@ describe('Tests auth routes', () => {
             })
             .end((err, res) => {
                 res.status.should.equal(200);
+                res.body.user.should.have.property('id')
+                res.body.user.should.have.property('firstName')
+                res.body.user.should.have.property('email')
+                res.body.user.should.have.property('token')
                 done();
             });
     });

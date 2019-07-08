@@ -2,7 +2,7 @@ import { propertys } from '../models/propertys';
 
 
 export class PropertyController {
-    propertyAdvert(req,res){ 
+    postPropertyAdvert(req,res){ 
         const property = {
             id: propertys.length +1,
             owner: req.body.owner ,
@@ -17,8 +17,8 @@ export class PropertyController {
         }
     propertys.push(property);
     res.status(201).send({message: 'success', property})
-
 };
+
 // find (ad)property id then update details
 updateProperty(req,res){
     const property = propertys.find(ad => ad.id === parseInt(req.params.id))

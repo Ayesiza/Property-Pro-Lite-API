@@ -13,8 +13,8 @@ signUp(req, res){
         address: req.body.address,
         isadmin: req.body.isadmin
     };
-    const {email,password} = req.body
-    const token = jwt.sign({email,password}, appSecreteKey, { expiresIn: '1hr' });
+    
+    const token = jwt.sign({email:req.body.email}, appSecreteKey, { expiresIn: '1hr' });
     user.token = token;
     users.push(user);
     res.status(201).send(user);
