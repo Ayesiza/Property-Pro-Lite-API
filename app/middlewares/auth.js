@@ -3,7 +3,7 @@ import Joi from '@hapi/joi';
 const appSecretkey = 'hckjdsjsdadnbqdkjdqxbjkqwkn'
  import jwt from 'jsonwebtoken';
 
-export function getToken(req, res, next) {
+ export function getToken(req, res, next) {
   const bearerHeader = req.headers.authorization;
   if (typeof bearerHeader === 'undefined') return res.status(403).send({ error: 403, message: 'provide a token' });
   // can console log to see the greater picture(console.log(bearerHeader))
@@ -21,7 +21,7 @@ export const checkIfUserExists = (req, res, next) => {
     if (finduser) return res.status(409).send({ error: 409, message: 'user already exists'})
     next() 
 };
-// userFromToken = is got from the tokenf in signup route
+// userFromToken(email) = is got from the tokenf in signup route
 export const userAgent = (req, res, next)=> {
     jwt.verify(req.token, appSecretkey, (err, userFromToken) => {
      if (err) return res.status(403).json({ error: 403, message: err.message });

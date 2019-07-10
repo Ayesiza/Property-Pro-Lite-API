@@ -20,10 +20,10 @@ describe('Tests auth routes', () => {
                 phoneNumber: "25606587422",
                 address: "wakiso",
                 isadmin:false
-
             })
             .end((err, res) => {
                 res.status.should.equal(201);
+                res.body.message.should.equal('successfuly signedup');
                 res.body.should.have.property('id')
                 res.body.should.have.property('firstName')
                 res.body.should.have.property('token')
@@ -73,6 +73,7 @@ describe('Tests auth routes', () => {
             })
             .end((err, res) => {
                 res.status.should.equal(200);
+                res.body.message.should.equal('success');
                 res.body.user.should.have.property('id')
                 res.body.user.should.have.property('firstName')
                 res.body.user.should.have.property('email')
