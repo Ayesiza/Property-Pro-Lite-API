@@ -17,7 +17,7 @@ signUp(req, res){
     const token = jwt.sign({email:req.body.email}, appSecreteKey, { expiresIn: '1hr' });
     user.token = token;
     users.push(user);
-        res.status(201).send({status:201,message:'successfuly signedup' ,user});
+        res.status(201).send({status:201,message:'successfuly signedUp' ,user});
 };
 
 signIn(req, res){
