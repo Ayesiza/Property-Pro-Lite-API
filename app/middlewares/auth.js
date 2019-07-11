@@ -37,7 +37,7 @@ export function authValidate(req, res, next) {
     firstName: Joi.string().min(3).regex(/^[a-zA-Z\-]+$/).required(),
     lastName: Joi.string().min(3).regex(/^[a-zA-Z\-]+$/).required(),
     address: Joi.string().min(3).regex(/^[a-zA-Z0-9]+$/).required(),
-    password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+    password: Joi.string().regex(/^[a-zA-Z0-9]{8,30}$/).required(),
     phoneNumber:Joi.string().regex(/^[0-9]{10,13}$/).required(),
     isadmin:Joi.boolean().required(),
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
