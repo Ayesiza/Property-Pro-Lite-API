@@ -102,7 +102,7 @@ describe('Tests property routes', () => {
 
     it('tests allProperty', (done) => {
         request(app)
-            .get('/api/v1/property')
+            .get('/api/v1/propertys')
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 res.status.should.equal(200);
@@ -113,7 +113,7 @@ describe('Tests property routes', () => {
 
     it('tests propertyType', (done) => {
         request(app)
-            .get('/api/v1/property?type=3bedroom')
+            .get('/api/v1/propertys?type=3bedroom')
             .set('Authorization', `Bearer ${token}`)
             .end((err, res) => {
                 res.status.should.equal(200)

@@ -23,7 +23,9 @@ signUp(req, res){
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
         address: req.body.address,
-        isadmin: req.body.isadmin}
+        isadmin: req.body.isadmin,
+        token
+    }
             
        })
 };
