@@ -24,6 +24,7 @@ describe('Tests auth routes', () => {
             .end((err, res) => {
                 res.status.should.equal(201);
                 res.body.message.should.equal('successfuly signedUp');
+                
                 done();
             });
     });
@@ -42,6 +43,7 @@ describe('Tests auth routes', () => {
             .end((err, res) => {
                 res.status.should.equal(409);
                 res.body.message.should.equal('user already exists');
+                
                 done();
             });
     });

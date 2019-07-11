@@ -20,7 +20,7 @@ router.patch('/property/:id/sold',getToken, verifyUserToken, userAgent, advert.m
 
 router.delete('/property/:id',getToken, verifyUserToken, userAgent, advert.deleteAdvert)
 
-router.get('/property',propertyType, advert.allProperty)
+router.get('/propertys',propertyType, advert.allProperty)
 
 router.get('/property/:id', advert.specificProperty)
 
