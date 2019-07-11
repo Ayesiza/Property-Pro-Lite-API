@@ -52,8 +52,9 @@ deleteAdvert(req, res){
 // get a specific s(property) by id
 specificProperty(req,res){
     const property = propertys.find(s => s.id === parseInt(req.params.id))
+    const checkInput = req.params.id.match(/^[0-9]$/);
+    if(!checkInput) return res.status(400).send({error:400, message:'parameter should be a valid number'})
     if(!property) return res.status(404).send({error:404, message:'specific property not found'})
-    res.status(200).send({status:200, property})
-    
+    res.status(200).send({status:200, property}) 
   };
 };

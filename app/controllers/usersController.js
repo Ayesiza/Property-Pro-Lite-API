@@ -17,7 +17,7 @@ signUp(req, res){
     const token = jwt.sign({email:req.body.email}, appSecreteKey, { expiresIn: '1hr' });
     user.token = token;
     users.push(user);
-    res.status(201).send(user);
+        res.status(201).send({status:201,message:'successfuly signedUp' ,user});
 };
 
 signIn(req, res){
@@ -26,13 +26,10 @@ signIn(req, res){
     });
     // check if user doesnt exist
     if (!user) {
-        return res.status(404).send({
-            message: 'wrong email or password'
-        })
+        return res.status(404).send({message: 'wrong email or password'})
     }
-    const {email,password} = req.body
-    const token = jwt.sign({email,password}, appSecreteKey, { expiresIn: '1hr' });
+    const token = jwt.sign({email:req.body.email}, appSecreteKey, { expiresIn: '1hr' });
     user.token = token;
-    res.send({message: 'success',user})
+    res.send({status:200,message:'success',user})
 };
 };

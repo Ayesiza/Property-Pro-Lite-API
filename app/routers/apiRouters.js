@@ -20,8 +20,8 @@ router.patch('/property/:id/sold',getToken, verifyUserToken, userAgent, advert.m
 
 router.delete('/property/:id',getToken, verifyUserToken, userAgent, advert.deleteAdvert)
 
-router.get('/property',getToken, verifyUserToken, propertyType, advert.allProperty)
+router.get('/property',propertyType, advert.allProperty)
 
-router.get('/property/:id',getToken, verifyUserToken, advert.specificProperty)
+router.get('/property/:id', advert.specificProperty)
 
 export default router;
