@@ -23,12 +23,12 @@ export const propertyType =(req, res ,next) =>{
 export function propertyValidate(req, res, next) {
     const schema = Joi.object().keys({
      state: Joi.string().regex(/^[a-zA-Z\-]+$/).required(),
-     status: Joi.string().regex(/^[a-zA-Z\-]+$/).required(),
      price: Joi.number().required(),
      city: Joi.string().regex(/^[a-zA-Z\-]+$/).required(),
      address: Joi.string().min(3).regex(/^[a-zA-Z0-9]+$/).required(),
      type: Joi.string().min(3).regex(/^[a-zA-Z0-9]+$/).required(),
-     createdOn: Joi.number().required(),
+     image: Joi.string().required(),
+    
 
 
   });

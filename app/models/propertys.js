@@ -19,7 +19,7 @@ export const propertys =[
         state: 'muhabura',
         city: 'kigali',
         address: 'lumuStreet',
-        type: '4bedroom',
+        type: '4bedrooms',
         createdOn: '17062019',
         image : 'https://res.cloudinary.com/dr1g2w3wc/image/upload/v1562080738/4bedroom1_uhqdxh.jpg'
         
@@ -32,7 +32,7 @@ export const propertys =[
             state: 'wakiso',
             city: 'nansana',
             address: 'luluAvenue',
-            type: '3bedroom',
+            type: '3bedrooms',
             createdOn: '24032019',
             image : 'https://res.cloudinary.com/dr1g2w3wc/image/upload/v1562080743/3bedroom3_uch4yx.jpg'
             },

@@ -17,17 +17,8 @@ signUp(req, res){
     const token = jwt.sign({email:req.body.email}, appSecreteKey, { expiresIn: '1hr' });
     user.token = token;
     users.push(user);
-            res.status(201).send({status:201,message:'successfuly signedUp', data:{
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        address: req.body.address,
-        isadmin: req.body.isadmin,
-        token
-    }
-            
-       })
+    const {password, ...noA} = user;
+     res.status(201).send({status:201,message:'successfuly signedUp', data:noA})
 };
 
 signIn(req, res){
@@ -40,6 +31,8 @@ signIn(req, res){
     }
     const token = jwt.sign({email:req.body.email}, appSecreteKey, { expiresIn: '1hr' });
     user.token = token;
-    res.send({status:200,message:'success',user})
+    // airbnb style guides for removing password in the body
+    const {password, ...noA} = user;
+    res.send({status:200,message:'success',user:noA})
 };
 };

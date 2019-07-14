@@ -2,6 +2,13 @@ import express from 'express';
 import apiRouters from './app/routers/apiRouters'
 import swaggerUi from 'swagger-ui-express'
 import swaggerDoc from './swagger.json'
+import bodyParser from 'body-parser'
+
+// app.use(bodyParser.json());
+
+// app.use(bodyParser.urlencoded({ extended: false }));
+ 
+
 
 const app = express()
 const port = 3000

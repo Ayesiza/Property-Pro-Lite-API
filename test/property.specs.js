@@ -14,7 +14,7 @@ describe('Tests property routes', () => {
             .post('/api/v1/users/auth/signin')
             .send({
                 email: 'maira@gmail.com',
-                password: 'maira',
+                password: 'maira7777',
             })
             .end((err, res) => {
                 token = res.body.user.token;
@@ -26,13 +26,12 @@ describe('Tests property routes', () => {
             .post('/api/v1/property')
             .set('Authorization', `Bearer ${token}`)
             .send({
-                status: 'available',
                 price: '768.90',
                 state: 'kampala',
                 city: 'kampala',
                 address: 'avemaPark',
                 type: 'miniflat',
-                createdOn: '02092019'
+                image : "https://res.cloudinary.com/dr1g2w3wc/image/upload/v1562080747/flat1_iqhf4f.jpg"
             })
             .end((err, res) => {
                 res.status.should.equal(201);
@@ -76,9 +75,6 @@ describe('Tests property routes', () => {
         request(app)
             .patch('/api/v1/property/1/sold')
             .set('Authorization', `Bearer ${token}`)
-            .send({
-                status: 'sold'
-            })
             .end((err, res) => {
                 res.status.should.equal(201);
                 res.body.property.should.have.property('price')
@@ -91,9 +87,6 @@ describe('Tests property routes', () => {
         request(app)
             .patch('/api/v1/property/10/sold')
             .set('Authorization', `Bearer ${token}`)
-            .send({
-                status: 'sold'
-            })
             .end((err, res) => {
                 res.status.should.equal(404);
                 done();
