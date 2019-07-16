@@ -1,5 +1,15 @@
-export const users = [
-    {id:1,
+import client from '../services/database';
+    export class User{
+        static signUp(firstName, lastName, email, address, phoneNumber, password, isadmin){
+            const userQuery = 'INSERT INTO users(firstName,lastName,email,address,phoneNumber,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7) returning *';
+            const values = [firstName, lastName, email, address, phoneNumber, password, isadmin];
+            client.query(userQuery, values);
+        }
+    }
+
+ export const users = [
+    {
+     id:1,
      email:'maira@gmail.com',
      firstName:'maira',
      lastName:'princess',

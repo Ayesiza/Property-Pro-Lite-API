@@ -14,7 +14,7 @@ const users = `create table if not exists
         address varchar (50) not null,
         phoneNumber varchar (50) not null,
         password varchar(255) not null,
-        isAdmin boolean default false not null
+        isadmin boolean default false not null
        )`;
 
 const property = `create table if not exists
