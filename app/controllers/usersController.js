@@ -1,24 +1,14 @@
 import { users } from '../models/users';
+import client from '../config/database';
 const appSecreteKey = 'hckjdsjsdadnbqdkjdqxbjkqwkn'
 import jwt from 'jsonwebtoken';
 export class userController{
 signUp(req, res){
-    const user = {
-        id: users.length + 1,
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        password: req.body.password,
-        phoneNumber: req.body.phoneNumber,
-        address: req.body.address,
-        isadmin: req.body.isadmin
-    };
-    
+    const userQuery = 'INSERT INTO users(firstName,lastName,email,address,phoneNumber,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
+    const values = [req.body.firstName, req.body.lastName, req.body.email, req.body.address, req.body.phoneNumber, req.body.password, req.body.isadmin];
+    client.query(userQuery, values);
     const token = jwt.sign({email:req.body.email}, appSecreteKey, { expiresIn: '1hr' });
-    user.token = token;
-    users.push(user);
-    const {password, ...noA} = user;
-     res.status(201).send({status:201,message:'successfuly signedUp', data:noA})
+     res.status(201).send({status:201,message:'successfuly signedUp', token})
 };
 
 signIn(req, res){
