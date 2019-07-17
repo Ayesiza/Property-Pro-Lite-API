@@ -1,32 +1,36 @@
 import Joi from '@hapi/joi';
 import jwt from 'jsonwebtoken';
-import { users } from '../models/users';
+import { users,User } from '../models/users';
+import dotenv from 'dotenv';
 
-const appSecretkey = 'hckjdsjsdadnbqdkjdqxbjkqwkn';
+ dotenv.config();
+
 
 export function getToken(req, res, next) {
   const bearerHeader = req.headers.authorization;
   if (typeof bearerHeader === 'undefined') return res.status(403).send({ error: 403, message: 'provide a token' });
-  // can console log to see the greater picture(console.log(bearerHeader))
   const bearer = bearerHeader.split(' ');
   // get token from array
   const bearerToken = bearer[1];
-  // here is to spread the token so that it can be used in the whole application
   req.token = bearerToken;
   next();
 }
 
 // check if real users trying access
-export const checkIfUserExists = (req, res, next) => {
-  const finduser = users.find(user => user.email === req.body.email);
-  if (finduser) return res.status(409).send({ error: 409, message: 'user already exists' });
+export async function checkIfUserExists(req, res, next){
+  try {
+    const finduser = await User.findOneUserEmail(req.body.email);
+  if (finduser.rows[0]) return res.status(409).send({ error: 409, message: 'user already exists' });
   next();
+  } catch (error) {
+    res.send(error.message)   
+  }  
 };
-// userFromToken(email) = is got from the tokenf in signup route
+
 export const userAgent = (req, res, next) => {
-  jwt.verify(req.token, appSecretkey, (err, userFromToken) => {
+  jwt.verify(req.token, process.env.appSecretkey, (err, userFromToken) => {
     if (err) return res.status(403).json({ error: 403, message: err.message });
-    // find a user with the email in the te token
+    // find a user with the email in the token
     const user = users.find(user => user.email === userFromToken.email);
     if (user.isadmin === false) return res.status(403).send({ error: 403, message: 'for only agent' });
     next();

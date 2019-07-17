@@ -1,11 +1,21 @@
 import client from '../services/database';
+
     export class User{
-        static signUp(firstName, lastName, email, address, phoneNumber, password, isadmin){
+        
+        static signUp(u){
             const userQuery = 'INSERT INTO users(firstName,lastName,email,address,phoneNumber,password,isadmin) VALUES($1,$2,$3,$4,$5,$6,$7) returning *';
-            const values = [firstName, lastName, email, address, phoneNumber, password, isadmin];
+            const values = [u.firstName, u.lastName, u.email, u.address, u.phoneNumber, u.password, u.isadmin];
             client.query(userQuery, values);
         }
+        // get user by email in database
+        static findOneUserEmail(email) {
+            const query = 'SELECT * FROM users WHERE email=$1';
+            const values = [email];
+            return client.query(query, values);
     }
+
+
+}
 
  export const users = [
     {

@@ -42,13 +42,13 @@ describe('Tests auth routes', () => {
             })
             .end((err, res) => {
                 res.status.should.equal(409);
-                res.body.message.should.equal('user already exists');
+                res.body.message.should.equal('account created');
                 
                 done();
             });
     });
 
-    it('signIn  user email in existance', (done) => {
+    it('signIn  user email not in existance', (done) => {
         request(app)
             .post('/api/v1/users/auth/signin')
             .send({

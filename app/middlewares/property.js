@@ -2,11 +2,13 @@ import Joi from '@hapi/joi';
 import jwt from 'jsonwebtoken';
 import { propertys } from '../models/propertys';
 
-const appSecretkey = 'hckjdsjsdadnbqdkjdqxbjkqwkn';
+import dotenv from 'dotenv';
+
+ dotenv.config();
 
 // verify if user token is valid
 export const verifyUserToken = (req, res, next) => {
-  jwt.verify(req.token, appSecretkey, (err, userFromToken) => {
+  jwt.verify(req.token, process.env.appSecretkey, (err, userFromToken) => {
     if (err) return res.status(403).json({ error: 403, message: err.message });
     next();
   });

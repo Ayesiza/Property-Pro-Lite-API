@@ -1,7 +1,10 @@
 import { Client } from 'pg';
+import dotenv from 'dotenv';
+
+ dotenv.config();
 
 const client = new Client({
-    connectionString: 'postgres://postgres:muslim22@127.0.0.1:5432/property-pro-lite'
+    connectionString:process.env.DATABASE_STRING
     
 });
 
