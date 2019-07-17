@@ -11,8 +11,7 @@ signUp(req, res){
     User.signUp(userData)
     const token = jwt.sign({email:req.body.email}, process.env.appSecretKey, { expiresIn: '24hr' });
      res.status(201).send({status:201,message:'account created',userData})
-     
-     
+      
 };
 
 async signIn(req, res){

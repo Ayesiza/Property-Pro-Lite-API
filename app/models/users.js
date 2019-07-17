@@ -32,7 +32,7 @@ import client from '../services/database';
      email:'daren@gmail.com', 
      firstName:'daren', 
      lastName:'martha', 
-     password:'daren7777',
+     password:'daren7787',
      phoneNumber:'25689343661', 
      address:'entebbe' , 
      isadmin:false},
