@@ -1,7 +1,10 @@
 import { Client } from 'pg';
+import dotenv from 'dotenv';
+
+ dotenv.config();
 
 const client = new Client({
-    connectionString: 'postgres://postgres:muslim22@127.0.0.1:5432/property-pro-lite'
+    connectionString:process.env.DATABASE_STRING
     
 });
 
@@ -14,7 +17,7 @@ const users = `create table if not exists
         address varchar (50) not null,
         phoneNumber varchar (50) not null,
         password varchar(255) not null,
-        isAdmin boolean default false not null
+        isadmin boolean default false not null
        )`;
 
 const property = `create table if not exists
