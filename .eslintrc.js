@@ -16,5 +16,11 @@ module.exports = {
   },
   rules: {
     
+    "indent": 0,
+    "linebreak-style": 0,
+    "comma-dangle": 0,
+    "no-restricted-globals": 0,
+    "camelcase": 0,
+    "eslint.autoFixOnSave": true
 } 
 };
