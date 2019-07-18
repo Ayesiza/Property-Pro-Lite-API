@@ -1,6 +1,6 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import apiRouters from './app/routers/apiRouters'
+import apiRouters from './app/routers/apiRouters';
 import swaggerDoc from './swagger.json';
 
 const app = express();

@@ -9,11 +9,13 @@ export class UserController {
     const {
       firstName, lastName, email, address, phoneNumber, isadmin,
     } = req.body;
-    const userData = [firstName, lastName, email, address, phoneNumber, req.body.password, isadmin]
+    const userData = [firstName, lastName, email, address, phoneNumber, req.body.password, isadmin];
     const newUser = await User.signUp(userData);
     const token = jwt.sign({ email: req.body.email }, process.env.appSecretKey, { expiresIn: '24hr' });
-    const {password, ...noA} = newUser.rows[0]
-    res.status(201).send({status: 201, message: 'account created', data:noA , token });
+    const { password, ...noA } = newUser.rows[0];
+    res.status(201).send({
+      status: 201, message: 'account created', data: noA, token
+    });
   }
 
   async signIn(req, res) {
@@ -25,5 +27,5 @@ export class UserController {
     // airbnb style guides for removing password in the body
     const { password, ...noA } = finduser.rows[0];
     res.send({ status: 200, message: 'success', user: noA });
-}
+  }
 }
