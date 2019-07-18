@@ -32,8 +32,6 @@ export function propertyValidate(req, res, next) {
     type: Joi.string().min(3).regex(/^[a-zA-Z0-9]+$/).required(),
     imageurl: Joi.string().required(),
     owner: Joi.number().required(),
-
-
   });
   const result = Joi.validate(req.body, schema);
   // input validation

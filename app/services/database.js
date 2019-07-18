@@ -1,7 +1,7 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
 
- dotenv.config();
+dotenv.config();
 
 const client = new Client({
     connectionString: process.env.DATABASE_STRING
@@ -35,10 +35,10 @@ const property = `create table if not exists
     )`;
 
 client.connect()
-.then(() => console.log('connected . . .'))
-.then(() => client.query(users))
-.then(() => client.query(property))
-.catch(e => console.log(e.message));
+    .then(() => console.log('connected to database. . .'))
+    .then(() => client.query(users))
+    .then(() => client.query(property))
+    .catch(e => console.log(e.message));
 
 
 export default client;

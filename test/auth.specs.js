@@ -17,7 +17,7 @@ describe('Tests auth routes', () => {
         email: 'zaria@gmail.com',
         firstName: 'zariat',
         lastName: 'marion',
-        password: 'zariat',
+        password: 'zariat7777',
         phoneNumber: '25606587422',
         address: 'wakiso',
         isadmin: false,
@@ -36,7 +36,7 @@ describe('Tests auth routes', () => {
         email: 'zariat@gmail.com',
         firstName: 'zariat',
         lastName: 'marion',
-        password: 'zariat',
+        password: 'zariat7777',
         phoneNumber: '25606587422',
         address: 'wakiso',
         isadmin: false,
@@ -54,7 +54,7 @@ describe('Tests auth routes', () => {
       .post('/api/v1/users/auth/signin')
       .send({
         email: 'zari@gmail.com',
-        password: 'zariat',
+        password: 'zariat7777',
       })
       .end((err, res) => {
         res.status.should.equal(404);
@@ -68,7 +68,7 @@ describe('Tests auth routes', () => {
       .post('/api/v1/users/auth/signin')
       .send({
         email: 'zariat@gmail.com',
-        password: 'zariat',
+        password: 'zariat7777',
       })
       .end((err, res) => {
         res.status.should.equal(200);

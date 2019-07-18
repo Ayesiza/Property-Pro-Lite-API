@@ -28,8 +28,8 @@ export async function checkIfUserExists(req, res, next) {
   }
 }
 
-export const userAgent =  (req, res, next) => {
-  jwt.verify(req.token, process.env.appSecretkey, async(err, userFromToken) => {
+export const userAgent = (req, res, next) => {
+  jwt.verify(req.token, process.env.appSecretkey, async (err, userFromToken) => {
     if (err) return res.status(403).json({ error: 403, message: err.message });
     // find a user with the email in the token
     const finduser = await User.findOneUserEmail(userFromToken.email);
