@@ -1,10 +1,10 @@
 import Joi from '@hapi/joi';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { propertys } from '../models/propertys';
 
-import dotenv from 'dotenv';
 
- dotenv.config();
+dotenv.config();
 
 // verify if user token is valid
 export const verifyUserToken = (req, res, next) => {
@@ -30,8 +30,8 @@ export function propertyValidate(req, res, next) {
     city: Joi.string().regex(/^[a-zA-Z\-]+$/).required(),
     address: Joi.string().min(3).regex(/^[a-zA-Z0-9]+$/).required(),
     type: Joi.string().min(3).regex(/^[a-zA-Z0-9]+$/).required(),
-    image: Joi.string().required(),
-
+    imageurl: Joi.string().required(),
+    owner: Joi.number().required(),
 
 
   });
@@ -44,5 +44,3 @@ export function propertyValidate(req, res, next) {
   }
   next();
 }
-
-

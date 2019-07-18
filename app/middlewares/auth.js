@@ -1,9 +1,10 @@
+/* eslint-disable consistent-return */
 import Joi from '@hapi/joi';
 import jwt from 'jsonwebtoken';
-import { users,User } from '../models/users';
 import dotenv from 'dotenv';
+import { users, User } from '../models/users';
 
- dotenv.config();
+dotenv.config();
 
 
 export function getToken(req, res, next) {
@@ -17,22 +18,22 @@ export function getToken(req, res, next) {
 }
 
 // check if real users trying access
-export async function checkIfUserExists(req, res, next){
+export async function checkIfUserExists(req, res, next) {
   try {
     const finduser = await User.findOneUserEmail(req.body.email);
-  if (finduser.rows[0]) return res.status(409).send({ error: 409, message: 'user already exists' });
-  next();
+    if (finduser.rows[0]) return res.status(409).send({ error: 409, message: 'user already exists' });
+    next();
   } catch (error) {
-    res.send(error.message)   
-  }  
-};
+    res.send(error.message);
+  }
+}
 
-export const userAgent = (req, res, next) => {
-  jwt.verify(req.token, process.env.appSecretkey, (err, userFromToken) => {
+export const userAgent =  (req, res, next) => {
+  jwt.verify(req.token, process.env.appSecretkey, async(err, userFromToken) => {
     if (err) return res.status(403).json({ error: 403, message: err.message });
     // find a user with the email in the token
-    const user = users.find(user => user.email === userFromToken.email);
-    if (user.isadmin === false) return res.status(403).send({ error: 403, message: 'for only agent' });
+    const finduser = await User.findOneUserEmail(userFromToken.email);
+    if (finduser.rows[0].isadmin === false) return res.status(403).send({ error: 403, message: 'for only agent' });
     next();
   });
 };
@@ -55,4 +56,3 @@ export function authValidate(req, res, next) {
   }
   next();
 }
-

@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
  dotenv.config();
 
 const client = new Client({
-    connectionString:process.env.DATABASE_STRING
-    
+    connectionString: process.env.DATABASE_STRING
+
 });
 
 const users = `create table if not exists
@@ -38,7 +38,7 @@ client.connect()
 .then(() => console.log('connected . . .'))
 .then(() => client.query(users))
 .then(() => client.query(property))
-.catch(e => console.log(e.message))
+.catch(e => console.log(e.message));
 
 
 export default client;
