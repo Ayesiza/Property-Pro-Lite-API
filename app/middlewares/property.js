@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { propertys } from '../models/propertys';
+import { Property } from '../models/propertys';
 
 
 dotenv.config();
@@ -14,10 +14,11 @@ export const verifyUserToken = (req, res, next) => {
   });
 };
 
-export const propertyType = (req, res, next) => {
+export const propertyType = async (req, res, next) => {
   if (req.query.type) {
-    const property = propertys.filter(a => a.type === req.query.type);
-    return res.status(200).send({ status: 200, property });
+    console.log(req.query.type)
+    const property = await Property.propertyTypes(req.query.type);
+    return res.status(200).send({ status: "success", data:property.rows[0]});
   }
   next();
 };

@@ -15,43 +15,39 @@ export class PropertyController {
 
   // find (ad)property id then update details
   async updateProperty(req, res) {
-    const findproperty = await property.findById(req.params.id);
-    const property = propertys.find(ad => ad.id === parseInt(req.params.id));
-    if (!property) return res.status(404).send({ error: 404, message: 'property not found' });
-    property.price = req.body.price,
-    property.type = req.body.type;
-    res.status(201).send({ message: 'success', property });
+    const findproperty = await Property.updatepropertyAdvert(req.body.price,req.params.id);
+    if (!findproperty.rows[0]) return res.status(404).send({ error: 404, message: 'property not found' });
+    res.status(201).send({ status: 200, data:findproperty.rows[0] });
   }
 
   // find (a)property id then mark as sold
-  markAsSold(req, res) {
-    const property = propertys.find(a => a.id === parseInt(req.params.id));
-    if (!property) return res.status(404).send({ error: 404, message: 'property of that id not found' });
-    property.status = 'sold',
-    res.status(201).send({ message: 'success', property });
+  async markAsSold(req, res) {
+    const findproperty = await Property.markSold(req.params.id);
+    if (!findproperty.rows[0]) return res.status(404).send({ error: 404, message: 'property not found' });
+    res.status(201).send({ status: 200, data:findproperty.rows[0] });
   }
 
   // find (d)property id
-  deleteAdvert(req, res) {
-    const property = propertys.find(d => d.id === parseInt(req.params.id));
-    if (!property) return res.status(404).send({ status: 404, message: 'property of given id not found' });
-    // delete
-    const index = propertys.indexOf(property);
-    propertys.splice(index, 1);
-    res.status(200).send({ status: 200, message: 'successfuly deleted' });
+  async deleteAdvert(req, res) {
+    const findproperty = await Property.deleteProp(req.params.id);
+    console.log(findproperty.rows[0])
+    if (!findproperty.rows[0]) return res.status(404).send({ status: 404, message: 'property deleted' });
   }
 
   // get all property adverts
-  allProperty(req, res) {
-    res.status(200).send({ status: 200, propertys });
+  async allProperty(req, res) {
+    const all = await Property.allPropertyInDb()
+    return res.status(200).send({status:200, data:all.rows})
   }
 
   // get a specific s(property) by id
-  specificProperty(req, res) {
-    const property = propertys.find(s => s.id === parseInt(req.params.id));
+  async specificProperty(req, res) {
     const checkInput = req.params.id.match(/^[0-9]+$/);
     if (!checkInput) return res.status(400).send({ error: 400, message: 'parameter should be a valid number' });
-    if (!property) return res.status(404).send({ error: 404, message: 'specific property not found' });
-    res.status(200).send({ status: 200, property });
+    const property = await Property.propById(req.params.id)
+    if (!property.rows[0]) return res.status(404).send({ error: 404, message: 'specific property not found' });
+    res.status(200).send({ status: 200, data:property.rows[0] });
   }
+
+  
 }

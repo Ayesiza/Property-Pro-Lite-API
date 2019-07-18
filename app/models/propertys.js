@@ -8,13 +8,34 @@ VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
   }
 
 
-  static updatepropertyAdvert(field, value) {
-    const query = `UPDATE propertyAdvert SET price= $1 = $1 WHERE(id= $2) RETURNING *`;
+  static updatepropertyAdvert(price,id) {
+    const queryUpdate = `UPDATE property SET price=$1 WHERE id= $2 RETURNING *`;
+    return client.query(queryUpdate, [price,id]);
+  }
 
-    const update = client.query(query, [value, price]);
+  static markSold(id) {
+    const markSold = `UPDATE property SET status='sold' WHERE id= $1 RETURNING *`;
+    return client.query(markSold, [id]);
+  }
 
-    return;
+  static deleteProp(id) {
+    const ad = `DELETE FROM property  WHERE id= $1 RETURNING *`;
+    return client.query(ad, [id]);
+  }
 
+  static allPropertyInDb() {
+    const ad = `SELECT * FROM property`;
+    return client.query(ad);
+  }  
+
+  static propById(id) {
+    const ad = `SELECT * FROM property WHERE id = $1`;
+    return client.query(ad,[id]);
+  }  
+
+  static propertyTypes(type){
+    const query = `SELECT * FROM property WHERE type=$1`;
+    return client.query(query,[type]);
   }
 }
 
